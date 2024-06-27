@@ -1,12 +1,13 @@
 import qs from "qs";
 import { flattenAttributes, getStrapiURL } from "@/lib/utils";
 import { unstable_noStore as noStore } from 'next/cache';
+import { getAuthToken } from "./services/get-token";
 
 const baseUrl = getStrapiURL();
 
 async function fetchData(url: string) {
   noStore();
-  const authToken = null; // we will implement this later getAuthToken() later
+  const authToken = await getAuthToken(); // we will implement this later getAuthToken() later
   const headers = {
     method: "GET",
     headers: {
@@ -74,4 +75,13 @@ export async function getGlobalPageMetadata() {
   });
 
   return await fetchData(url.href);
+}
+
+export async function getSummaries() {
+  const url = new URL("/api/summaries", baseUrl);
+  return fetchData(url.href);
+}
+
+export async function getSummaryById(summaryId: string) {
+  return fetchData(`${baseUrl}/api/summaries/${summaryId}`);
 }
