@@ -12,6 +12,11 @@ const nextConfig = {
           protocol: "https",
           hostname: "placehold.co",
         },
+        {
+          protocol: "https",
+          hostname: "worthy-splendor-c1b64066ea.media.strapiapp.com",
+        },
+        
       ],
     },
   };
